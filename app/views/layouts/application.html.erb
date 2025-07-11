@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Engineering Reindeer</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <!-- Google Font & base styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+
+    <!-- Lesson-specific styles -->
+    <%= stylesheet_link_tag 'lesson_view',  media: 'all', 'data-turbo-track': 'reload' %>
+  </head>
+
+
+  <body>
+    <%= yield %>
+  </body>
+</html>

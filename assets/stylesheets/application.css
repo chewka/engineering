@@ -1,0 +1,4 @@
+/* app/assets/stylesheets/application.css */
+
+/* Import lesson-specific styles */
+@import "lesson_view.css";

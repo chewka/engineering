@@ -1,0 +1,9 @@
+<h1>Lessons for Quarter <%= @quarter.id %></h1>
+<ul>
+  <% @lessons.each do |lesson| %>
+    <li>
+      <%= link_to "Lesson #{lesson.lesson_number}: #{lesson.name}",
+                  quarter_lesson_path(@quarter, lesson) %>
+    </li>
+  <% end %>
+</ul>

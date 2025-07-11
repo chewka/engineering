@@ -1,0 +1,76 @@
+<!-- app/views/lessons/show.html.erb -->
+<div class="container">
+  <div class="content-box">
+    <details class="dropdown-section" open>
+      <summary><strong>Essential Question</strong></summary>
+      <p><%= @lesson.essential_question %></p>
+    </details>
+
+    <details class="dropdown-section" open>
+      <summary><strong>Learning Intention</strong></summary>
+      <p><%= @lesson.learning_intention %></p>
+    </details>
+
+    <details class="dropdown-section" open>
+      <summary><strong>Standards</strong></summary>
+      <ul class="standards-list">
+        <% @lesson.standards.each do |standard| %>
+          <li>
+            <%= standard.code %>: <%= standard.description.upcase %>
+          </li>
+        <% end %>
+      </ul>
+    </details>
+
+    <% if @lesson.link.present? %>
+      <details class="dropdown-section">
+        <summary><strong>Link</strong></summary>
+        <p><%= link_to @lesson.link, @lesson.link, target: '_blank', rel: 'noopener' %></p>
+      </details>
+    <% end %>
+  </div>
+
+  <h3>Lesson <%= @lesson.lesson_number %>: <%= @lesson.name %></h3>
+  <%= simple_format(@lesson.content) %>
+
+  <% if @lesson.formative_assignments.any? %>
+    <section class="section-assignments">
+      <h2>Formative Assignments</h2>
+      <ul>
+        <% @lesson.formative_assignments.each do |fa| %>
+          <li>
+            <%= link_to fa.name, quarter_lesson_formative_assignment_path(@lesson.quarter, @lesson, fa) %>
+            (<%= fa.points %> pts)
+          </li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
+
+  <% if @lesson.summative_assignments.any? %>
+    <section class="section-assignments">
+      <h2>Summative Assignments</h2>
+      <ul>
+        <% @lesson.summative_assignments.each do |sa| %>
+          <li>
+            <%= link_to sa.name, quarter_lesson_summative_assignment_path(@lesson.quarter, @lesson, sa) %>
+            (<%= sa.points %> pts)
+          </li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
+
+  <% if @lesson.quizzes.any? %>
+    <section class="section-quizzes">
+      <h2>Quizzes</h2>
+      <ul>
+        <% @lesson.quizzes.each do |quiz| %>
+          <li>
+            <%= link_to quiz.name, quarter_lesson_quiz_path(@lesson.quarter, @lesson, quiz) %>
+          </li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
+</div>
